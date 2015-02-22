@@ -60,22 +60,22 @@ gulp.task('developer', ['dev:clean', 'dev:watch', 'dev:build'], function() {
     });
 });
 
-// gulp.task('deploy:clean', function(cb) {
-//   del([
-//     deployPaths.all
-//   ], {force: true}, cb);
-// });
+gulp.task('deploy:clean', function(cb) {
+  del([
+    deployPaths.all
+  ], {force: true}, cb);
+});
 
-// gulp.task('deploy:build', ['deploy:clean'], function() {
+gulp.task('deploy:build', ['deploy:clean'], function() {
 
-//   var transformations = transform(function (filename) {
-//     var b = browserify(filename);
-//     b.transform(reactify);
-//     return b.bundle();
-//   });
+  var transformations = transform(function (filename) {
+    var b = browserify(filename);
+    b.transform(reactify);
+    return b.bundle();
+  });
 
-//   return gulp.src(paths.apps)
-//     .pipe(transformations)
-//     .pipe(uglify())
-//     .pipe(gulp.dest(deployPaths.dist));
-// });
+  return gulp.src(paths.apps)
+    .pipe(transformations)
+    .pipe(uglify())
+    .pipe(gulp.dest(deployPaths.dist));
+});
